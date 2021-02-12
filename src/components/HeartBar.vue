@@ -29,7 +29,6 @@ export default defineComponent({
 
   setup(props) {
     const health = toRef(props, 'health');
-    const totalHearts = computed(() => Math.ceil(props.maxHealth / healthPerHeart));
 
     /** The current health, smoothed over time. */
     const visualHealth = useTransition(health, {
@@ -37,7 +36,7 @@ export default defineComponent({
       transition: [0.15, 0.86, 0, 1],
     });
 
-    /** The amount of fully filled hearts. */
+    const totalHearts = computed(() => Math.ceil(props.maxHealth / healthPerHeart));
     const filledHearts = computed(() => Math.floor(visualHealth.value / healthPerHeart));
 
     /** Gets the fill amount for the nth heart, zero-indexed, from 0 to 1. */
@@ -47,7 +46,7 @@ export default defineComponent({
       return (visualHealth.value % healthPerHeart) / healthPerHeart;
     };
 
-    return { totalHearts, getFillAmount, visualHealth, filledHearts };
+    return { totalHearts, getFillAmount };
   },
 });
 </script>
