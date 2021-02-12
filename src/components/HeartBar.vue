@@ -2,11 +2,7 @@
   <div class="heart-bar">
     <HealthHeart v-for="n in totalHearts" :key="n" :fill="getFillAmount(n)" />
   </div>
-  <!-- Debug info -->
   <p>HP: {{ health }} / {{ maxHealth }}</p>
-  <p>Smoothed HP: {{ visualHealth.toFixed(2) }} / {{ maxHealth.toFixed(2) }}</p>
-  <p>Filled hearts: {{ filledHearts }}</p>
-  <p>Current heart: {{ getFillAmount(filledHearts + 1).toFixed(2) }}</p>
 </template>
 
 <script lang="ts">
