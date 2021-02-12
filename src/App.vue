@@ -4,6 +4,10 @@
   <button @click="randomDamage">Damage</button>
   <button @click="randomHeal">Heal</button>
   <button @click="fullHeal">Heal fully</button>
+  <footer>
+    <p>Made with 💛 by <a href="https://danielegarciav.me" target="_blank">Daniel Garcia</a></p>
+    <p><a href="https://github.com/danielegarciav/animated-heart-bar" target="_blank">view source</a></p>
+  </footer>
 </template>
 
 <script lang="ts">
@@ -52,5 +56,15 @@ hr {
   border-style: none none solid;
   border-width: 2px;
   border-color: rgba(0, 0, 0, 0.2);
+}
+
+footer {
+  color: rgb(22, 22, 53);
+  font-size: 0.9rem;
+  font-family: Consolas, 'Courier New', Courier, monospace;
+}
+
+footer a {
+  color: rgb(42, 42, 82);
 }
 </style>
