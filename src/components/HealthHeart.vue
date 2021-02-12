@@ -74,6 +74,10 @@ export default defineComponent({
   text-shadow: 0 0 8px rgba(255, 100, 100, 0.2);
 }
 
+.silhouette .heart-foreground {
+  filter: invert(0.5) sepia(1) saturate(20) hue-rotate(-40deg);
+}
+
 .heart-background {
   position: absolute;
   z-index: -1;

@@ -1,4 +1,5 @@
 <template>
+  <div class="heart-bar silhouette">
     <HealthHeart v-for="n in totalHearts" :key="n" :fill="getFillAmount(n)" :maxFill="getMaxFillAmount(n)" />
   </div>
   <p>HP: {{ health }} / {{ maxHealth }}</p>
