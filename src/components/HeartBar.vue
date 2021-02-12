@@ -10,8 +10,6 @@ import { defineComponent, computed, toRef } from 'vue';
 import { useTransition } from '@vueuse/core';
 import HealthHeart from './HealthHeart.vue';
 
-const healthPerHeart = 4;
-
 export default defineComponent({
   name: 'HeartBar',
   components: { HealthHeart },
@@ -25,6 +23,10 @@ export default defineComponent({
       type: Number,
       required: true,
     },
+    healthPerHeart: {
+      type: Number,
+      default: 4,
+    },
   },
 
   setup(props) {
@@ -36,13 +38,14 @@ export default defineComponent({
       transition: [0.15, 0.86, 0, 1],
     });
 
-    const totalHearts = computed(() => Math.ceil(props.maxHealth / healthPerHeart));
-    const filledHearts = computed(() => Math.floor(visualHealth.value / healthPerHeart));
+    const totalHearts = computed(() => Math.ceil(props.maxHealth / props.healthPerHeart));
+    const filledHearts = computed(() => Math.floor(visualHealth.value / props.healthPerHeart));
 
     /** Gets the fill amount for the nth heart, zero-indexed, from 0 to 1. */
     const getFillAmount = (n: number) => {
       if (n <= filledHearts.value) return 1;
       if (n > filledHearts.value + 1) return 0;
+      const healthPerHeart = props.healthPerHeart;
       return (visualHealth.value % healthPerHeart) / healthPerHeart;
     };
 

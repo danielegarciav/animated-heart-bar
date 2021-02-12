@@ -1,5 +1,5 @@
 <template>
-  <HeartBar :health="health" :maxHealth="maxHealth" />
+  <HeartBar :health="health" :maxHealth="maxHealth" :healthPerHeart="healthPerHeart" />
   <hr />
   <button @click="randomDamage">Damage</button>
   <button @click="randomHeal">Heal</button>
