@@ -83,4 +83,8 @@ export default defineComponent({
   z-index: -1;
   filter: invert(0.8) opacity(0.4);
 }
+
+:root.dark .silhouette .heart-background {
+  filter: invert(0.5) opacity(0.2);
+}
 </style>

@@ -11,6 +11,8 @@
   <p>1 × 🧡 = {{ healthPerHeart }} HP</p>
   <button @click="addHealthPerHeart(-1)">Decrease HP per 🧡</button>
   <button @click="addHealthPerHeart(1)">Increase HP per 🧡</button>
+  <br />
+  <button @click="toggleDark">{{ isDark ? '🌞' : '🌙' }}</button>
   <footer>
     <p>Made with 💛 by <a href="https://danielegarciav.me" target="_blank">Daniel Garcia</a></p>
     <p><a href="https://github.com/danielegarciav/animated-heart-bar" target="_blank">view source</a></p>
@@ -19,7 +21,14 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import { useDark, useToggle } from '@vueuse/core';
 import HeartBar from './components/HeartBar.vue';
+
+const useDarkMode = () => {
+  const isDark = useDark({ valueLight: 'light' });
+  const toggleDark = useToggle(isDark);
+  return { isDark, toggleDark };
+};
 
 export default defineComponent({
   name: 'App',
@@ -60,12 +69,39 @@ export default defineComponent({
       fullHeal,
       addMaxHealth,
       addHealthPerHeart,
+      ...useDarkMode(),
     };
   },
 });
 </script>
 
 <style>
+:root {
+  --text-color: black;
+  --bg-color: white;
+  --footer-color: rgb(22, 22, 53);
+  --link-color: rgb(42, 42, 82);
+  --separator-color: rgba(0, 0, 0, 0.2);
+  --button-bg-color: rgb(216, 216, 216);
+  --button-text-color: rgb(61, 61, 61);
+}
+
+:root.dark {
+  --text-color: rgb(187, 187, 187);
+  --bg-color: #050505;
+  --footer-color: rgb(153, 153, 179);
+  --link-color: rgb(102, 102, 182);
+  --separator-color: rgba(139, 139, 139, 0.2);
+  --button-bg-color: rgb(59, 59, 59);
+  --button-text-color: rgb(200, 200, 200);
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: 0.2s;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -77,21 +113,34 @@ export default defineComponent({
 button {
   margin: 1rem;
   padding: 0.2rem 0.8rem;
+  border-style: solid;
+  border-radius: 2px;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  transition: 0.2s;
+}
+
+button:hover {
+  filter: brightness(0.9);
+}
+
+button:active {
+  filter: brightness(0.7);
 }
 
 hr {
   border-style: none none solid;
   border-width: 2px;
-  border-color: rgba(0, 0, 0, 0.2);
+  border-color: var(--separator-color);
 }
 
 footer {
-  color: rgb(22, 22, 53);
+  color: var(--footer-color);
   font-size: 0.9rem;
   font-family: Consolas, 'Courier New', Courier, monospace;
 }
 
 footer a {
-  color: rgb(42, 42, 82);
+  color: var(--link-color);
 }
 </style>
