@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, toRef } from 'vue';
 import { useTransition } from '@vueuse/core';
 import HealthHeart from './HealthHeart.vue';
 
@@ -28,7 +28,7 @@ export default defineComponent({
   },
 
   setup(props) {
-    const health = computed(() => props.health);
+    const health = toRef(props, 'health');
     const totalHearts = computed(() => Math.ceil(props.maxHealth / healthPerHeart));
 
     /** The current health, smoothed over time. */
