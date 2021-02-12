@@ -1,6 +1,5 @@
 <template>
-  <div class="heart-bar">
-    <HealthHeart v-for="n in totalHearts" :key="n" :fill="getFillAmount(n)" />
+    <HealthHeart v-for="n in totalHearts" :key="n" :fill="getFillAmount(n)" :maxFill="getMaxFillAmount(n)" />
   </div>
   <p>HP: {{ health }} / {{ maxHealth }}</p>
 </template>
@@ -49,7 +48,17 @@ export default defineComponent({
       return (visualHealth.value % healthPerHeart) / healthPerHeart;
     };
 
-    return { totalHearts, getFillAmount };
+    /** Gets the fill amount for the nth heart, zero-indexed, from 0 to 1. */
+    const getMaxFillAmount = (n: number) => {
+      if (n < totalHearts.value) return 1;
+      if (n > totalHearts.value) return 0;
+      const healthPerHeart = props.healthPerHeart;
+      const modulo = props.maxHealth % healthPerHeart;
+      if (modulo === 0) return 1;
+      return modulo / healthPerHeart;
+    };
+
+    return { totalHearts, getFillAmount, getMaxFillAmount };
   },
 });
 </script>

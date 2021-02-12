@@ -3,7 +3,7 @@
     <div class="heart-foreground" :style="{ clipPath: `path('${clipPath}')` }">
       <span>🧡</span>
     </div>
-    <div class="heart-background">
+    <div class="heart-background" :style="{ clipPath: `path('${maxClipPath}')` }">
       <span>🖤</span>
     </div>
   </div>
@@ -18,6 +18,10 @@ export default defineComponent({
 
   props: {
     fill: {
+      type: Number,
+      required: true,
+    },
+    maxFill: {
       type: Number,
       required: true,
     },
@@ -37,7 +41,12 @@ export default defineComponent({
       getArcPath(halfSize, halfSize, circleSize, 0, props.fill * 359.999),
     );
 
-    return { clipPath };
+    const maxClipPath = computed(() =>
+      // This function can't return data for a full circle yet, so we get as close as full as we can
+      getArcPath(halfSize, halfSize, circleSize, 0, props.maxFill * 359.999),
+    );
+
+    return { clipPath, maxClipPath };
   },
 });
 </script>
