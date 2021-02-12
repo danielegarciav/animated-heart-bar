@@ -1,8 +1,8 @@
 <template>
   <HeartBar :health="health" :maxHealth="maxHealth" />
   <hr />
-  <button @click="randomHeal">Heal</button>
   <button @click="randomDamage">Damage</button>
+  <button @click="randomHeal">Heal</button>
   <button @click="fullHeal">Heal fully</button>
 </template>
 
