@@ -4,6 +4,13 @@
   <button @click="randomDamage">Damage</button>
   <button @click="randomHeal">Heal</button>
   <button @click="fullHeal">Heal fully</button>
+  <br />
+  <button @click="addMaxHealth(-1)">Decrease max HP</button>
+  <button @click="addMaxHealth(1)">Increase max HP</button>
+  <br />
+  <p>1 × 🧡 = {{ healthPerHeart }} HP</p>
+  <button @click="addHealthPerHeart(-1)">Decrease HP per 🧡</button>
+  <button @click="addHealthPerHeart(1)">Increase HP per 🧡</button>
   <footer>
     <p>Made with 💛 by <a href="https://danielegarciav.me" target="_blank">Daniel Garcia</a></p>
     <p><a href="https://github.com/danielegarciav/animated-heart-bar" target="_blank">view source</a></p>
@@ -20,6 +27,7 @@ export default defineComponent({
   setup() {
     const health = ref(40);
     const maxHealth = ref(40);
+    const healthPerHeart = ref(4);
 
     const takeDamage = (amount: number) => {
       health.value = Math.max(0, health.value - amount);
@@ -33,7 +41,26 @@ export default defineComponent({
     const randomHeal = () => heal(1 + Math.round(Math.random() * maxHealth.value - 1));
     const fullHeal = () => (health.value = maxHealth.value);
 
-    return { health, maxHealth, randomDamage, randomHeal, fullHeal };
+    const addMaxHealth = (amount: number) => {
+      const newMax = Math.max(0, maxHealth.value + amount);
+      maxHealth.value = newMax;
+      health.value = Math.min(health.value, newMax);
+    };
+
+    const addHealthPerHeart = (amount: number) => {
+      healthPerHeart.value = Math.max(1, healthPerHeart.value + amount);
+    };
+
+    return {
+      health,
+      maxHealth,
+      healthPerHeart,
+      randomDamage,
+      randomHeal,
+      fullHeal,
+      addMaxHealth,
+      addHealthPerHeart,
+    };
   },
 });
 </script>
