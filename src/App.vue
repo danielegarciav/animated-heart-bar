@@ -17,12 +17,12 @@ export default defineComponent({
     const health = ref(40);
     const maxHealth = ref(40);
 
-    const takeDamage = (dmg: number) => {
-      health.value = Math.max(0, health.value - dmg);
+    const takeDamage = (amount: number) => {
+      health.value = Math.max(0, health.value - amount);
     };
 
-    const heal = (h: number) => {
-      health.value = Math.min(maxHealth.value, health.value + h);
+    const heal = (amount: number) => {
+      health.value = Math.min(maxHealth.value, health.value + amount);
     };
 
     const randomDamage = () => takeDamage(1 + Math.floor(Math.random() * maxHealth.value - 1));
