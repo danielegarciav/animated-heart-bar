@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import { describeSvgCircleSector } from '../util/svg-circle-sector';
+import { getArcPath } from '../util/svg-arc-path';
 
 export default defineComponent({
   name: 'HealthHeart',
@@ -34,7 +34,7 @@ export default defineComponent({
 
     const clipPath = computed(() =>
       // This function can't return data for a full circle yet, so we get as close as full as we can
-      describeSvgCircleSector(halfSize, halfSize, circleSize, 0, props.fill * 359.999),
+      getArcPath(halfSize, halfSize, circleSize, 0, props.fill * 359.999),
     );
 
     return { clipPath };

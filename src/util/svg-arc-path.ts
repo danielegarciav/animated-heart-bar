@@ -12,7 +12,7 @@ function polarToCartesian(centerX: number, centerY: number, radius: number, angl
 /**
  * Returns the SVG path data for a circle sector, where the angle goes in counterclockwise rotation.
  */
-export function describeSvgCircleSector(
+export function getArcPath(
   centerX: number,
   centerY: number,
   radius: number,
